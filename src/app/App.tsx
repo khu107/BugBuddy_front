@@ -1,8 +1,8 @@
 import React from "react";
 import "../css/app.css";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./screen/homePage";
-import Header from "./components/header";
+import Navbar from "./components/headers/Navbar";
+import "../css/navbar.css";
 
 function App() {
   const location = useLocation();
@@ -10,10 +10,8 @@ function App() {
 
   return (
     <>
-      {location.pathname === "/" ? <Header /> : null}
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <Navbar />
+      <Routes>{/* <Route path="/" element={<Home />} /> */}</Routes>
     </>
   );
 }
