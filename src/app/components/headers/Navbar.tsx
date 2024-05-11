@@ -2,8 +2,14 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import AddShoppingCartSharpIcon from "@mui/icons-material/AddShoppingCartSharp";
+import { openLoginModal } from "../../../redux/basketSlice";
+import { useDispatch } from "react-redux";
+
 export default function Navbar() {
   const authMember = false;
+
+  const dispatch = useDispatch();
+
   return (
     <div className="navbar">
       <Container className="navbar-container">
@@ -47,11 +53,19 @@ export default function Navbar() {
               </NavLink>
             </Box>
             {authMember && (
-              <Box>
-                <NavLink to="/">Admin</NavLink>
+              <Box className="hover-line">
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) => (isActive ? "underline" : "")}
+                >
+                  Dash board
+                </NavLink>
               </Box>
             )}
-            <AddShoppingCartSharpIcon />
+            <AddShoppingCartSharpIcon
+              sx={{ color: "white" }}
+              onClick={() => dispatch(openLoginModal())}
+            />
 
             {!authMember ? (
               <Button variant="contained" size="small" color="secondary">

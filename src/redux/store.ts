@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import basketSlice from "./basketSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    basket: basketSlice,
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

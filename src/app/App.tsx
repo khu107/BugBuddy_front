@@ -3,6 +3,7 @@ import "../css/app.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/headers/Navbar";
 import "../css/navbar.css";
+import Basket from "./components/headers/basket";
 
 function App() {
   const location = useLocation();
@@ -12,6 +13,8 @@ function App() {
     <>
       <Navbar />
       <Routes>{/* <Route path="/" element={<Home />} /> */}</Routes>
+
+      <Basket />
     </>
   );
 }
