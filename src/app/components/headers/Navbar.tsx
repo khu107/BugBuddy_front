@@ -7,7 +7,7 @@ import { openLoginModal } from "../../../redux/basketSlice";
 import { useDispatch } from "react-redux";
 
 export default function Navbar() {
-  const authMember = false;
+  const authMember = true;
 
   const dispatch = useDispatch();
 
@@ -56,7 +56,7 @@ export default function Navbar() {
             {authMember && (
               <Box className="hover-line">
                 <NavLink
-                  to="/admin"
+                  to="/dashboard"
                   className={({ isActive }) => (isActive ? "underline" : "")}
                 >
                   Dash board
