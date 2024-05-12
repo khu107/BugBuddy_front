@@ -1,7 +1,8 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import AddShoppingCartSharpIcon from "@mui/icons-material/AddShoppingCartSharp";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import Badge from "@mui/material/Badge";
 import { openLoginModal } from "../../../redux/basketSlice";
 import { useDispatch } from "react-redux";
 
@@ -62,10 +63,12 @@ export default function Navbar() {
                 </NavLink>
               </Box>
             )}
-            <AddShoppingCartSharpIcon
-              sx={{ color: "white" }}
-              onClick={() => dispatch(openLoginModal())}
-            />
+            <Badge badgeContent={4} color="secondary">
+              <ShoppingBagIcon
+                sx={{ color: "white" }}
+                onClick={() => dispatch(openLoginModal())}
+              />
+            </Badge>
 
             {!authMember ? (
               <Button variant="contained" size="small" color="secondary">

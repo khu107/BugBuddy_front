@@ -1,4 +1,3 @@
-import React from "react";
 import "../css/app.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/headers/Navbar";
@@ -10,12 +9,12 @@ function App() {
   console.log(location);
 
   return (
-    <>
+    <div style={{ height: "1200px" }}>
       <Navbar />
       <Routes>{/* <Route path="/" element={<Home />} /> */}</Routes>
 
       <Basket />
-    </>
+    </div>
   );
 }
 
