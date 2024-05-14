@@ -55,9 +55,10 @@ export default function Basket() {
             }}
           >
             <Box>
-              {[1, 2, 3].map(() => {
+              {[1, 2, 3].map((v, i) => {
                 return (
                   <Stack
+                    key={i}
                     flexDirection={"row"}
                     justifyContent={"space-between"}
                     marginBottom={"10px"}
