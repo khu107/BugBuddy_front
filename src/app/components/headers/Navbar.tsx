@@ -6,9 +6,10 @@ import Badge from "@mui/material/Badge";
 import { basketOpen } from "../../../redux/basketSlice";
 import { openAuthModal } from "../../../redux/authSlice";
 import { useDispatch } from "react-redux";
+import { useGlobals } from "../../../hooks/useGlobals";
 
 export default function Navbar() {
-  const authMember = false;
+  const { authMember } = useGlobals();
 
   const dispatch = useDispatch();
 
@@ -38,6 +39,7 @@ export default function Navbar() {
                 Home
               </NavLink>
             </Box>
+
             <Box className="hover-line">
               <NavLink
                 to="/shop"
@@ -54,7 +56,7 @@ export default function Navbar() {
                 Sale
               </NavLink>
             </Box>
-            {authMember && (
+            {authMember && authMember.memberType === "ADMIN" && (
               <Box className="hover-line">
                 <NavLink
                   to="/dashboard"

@@ -1,21 +1,15 @@
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { useMutation } from "react-query";
-import { login } from "../../api/apiClient";
+import useMember from "../../../hooks/useMember";
 
 export default function Login() {
   const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
 
-  const mutation = useMutation(
-    (input: { memberEmail: string; memberPassword: string }) => login(input),
-    {
-      onSuccess: () => console.log("로그인 성공:"),
-    }
-  );
+  const { loginMember } = useMember();
 
   const handleLoginRequest = () => {
-    mutation.mutate({ memberEmail, memberPassword });
+    loginMember.mutate({ memberEmail, memberPassword });
   };
 
   return (

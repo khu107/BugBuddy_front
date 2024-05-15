@@ -9,6 +9,7 @@ import { store } from "./redux/store";
 import App from "./app/App";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "../src/css/index.css";
+import ContextProvider from "./context/ContextProvider";
 
 const queryClient = new QueryClient();
 const container = document.getElementById("root")!;
@@ -17,14 +18,16 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </QueryClientProvider>
+      <ContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </ContextProvider>
     </Provider>
   </React.StrictMode>
 );
