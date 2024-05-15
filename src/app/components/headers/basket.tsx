@@ -2,21 +2,19 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import { useDispatch, useSelector } from "react-redux";
-import { closeLoginModal, openLoginModal } from "../../../redux/basketSlice";
+import { basketClose } from "../../../redux/basketSlice";
 import { Button, Stack, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Img from "../../../auth.webp";
 export default function Basket() {
   const dispatch = useDispatch();
-  const loginModalOpen = useSelector(
-    (state: any) => state.basket.loginModalOpen
-  );
+  const loginModalOpen = useSelector((state: any) => state.basket.basketOpen);
   return (
     <div>
       <Drawer
         open={loginModalOpen}
         anchor="right"
-        onClose={() => dispatch(closeLoginModal())}
+        onClose={() => dispatch(basketClose())}
       >
         <Box
           sx={{
@@ -36,7 +34,7 @@ export default function Basket() {
             >
               <CloseIcon
                 sx={{ color: "white", cursor: "pointer" }}
-                onClick={() => dispatch(closeLoginModal())}
+                onClick={() => dispatch(basketClose())}
               />
               <Typography variant="h3" color={"white"}>
                 Cart

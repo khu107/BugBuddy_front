@@ -9,6 +9,7 @@ import DashBoardPage from "./screen/dash-boardPage";
 import Footer from "./components/footer";
 import "../css/navbar.css";
 import "../css/footer.css";
+import Auth from "./components/auth";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,8 @@ function App() {
       </Routes>
       {location.pathname === "/dashboard" ? null : <Footer />}
       <Basket />
+
+      <Auth />
     </>
   );
 }

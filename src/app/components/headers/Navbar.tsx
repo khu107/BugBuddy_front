@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Badge from "@mui/material/Badge";
-import { openLoginModal } from "../../../redux/basketSlice";
+import { basketOpen } from "../../../redux/basketSlice";
+import { openAuthModal } from "../../../redux/authSlice";
 import { useDispatch } from "react-redux";
 
 export default function Navbar() {
-  const authMember = true;
+  const authMember = false;
 
   const dispatch = useDispatch();
 
@@ -66,12 +67,17 @@ export default function Navbar() {
             <Badge badgeContent={4} color="secondary">
               <ShoppingBagIcon
                 sx={{ color: "white" }}
-                onClick={() => dispatch(openLoginModal())}
+                onClick={() => dispatch(basketOpen())}
               />
             </Badge>
 
             {!authMember ? (
-              <Button variant="contained" size="small" color="secondary">
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                onClick={() => dispatch(openAuthModal())}
+              >
                 Login
               </Button>
             ) : (

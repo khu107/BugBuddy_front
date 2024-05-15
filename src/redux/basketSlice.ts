@@ -1,30 +1,28 @@
 // modalSlice.ts
 
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-interface ModalState {
-  loginModalOpen: boolean;
-  // cartModalOpen: boolean;
+interface BasketState {
+  basketOpen: boolean;
 }
 
-const initialState: ModalState = {
-  loginModalOpen: false,
-  // cartModalOpen: false,
+const initialState: BasketState = {
+  basketOpen: false,
 };
 
 const modalSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    openLoginModal(state) {
-      state.loginModalOpen = true;
+    basketOpen(state) {
+      state.basketOpen = true;
     },
-    closeLoginModal(state) {
-      state.loginModalOpen = false;
+    basketClose(state) {
+      state.basketOpen = false;
     },
   },
 });
 
-export const { openLoginModal, closeLoginModal } = modalSlice.actions;
+export const { basketOpen, basketClose } = modalSlice.actions;
 
 export default modalSlice.reducer;
