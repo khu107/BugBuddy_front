@@ -20,6 +20,13 @@ export const login = async (input: {
   return member;
 };
 
+// logout
+
+export const logout = async (): Promise<void> => {
+  const result = await apiClient.post("/member/logout", {});
+  localStorage.removeItem("memberData");
+};
+
 // 사용자 목록을 가져오는 함수
 export const fetchUsers = async (): Promise<any[]> => {
   const response = await apiClient.get("/user/all");

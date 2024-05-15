@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { fetchUsers, updateUserStatus, login } from "../app/api/apiClient";
+import {
+  fetchUsers,
+  updateUserStatus,
+  login,
+  logout,
+} from "../app/api/apiClient";
 import { useDispatch } from "react-redux";
 import { closeAuthModal } from "../redux/authSlice";
 import { useGlobals } from "./useGlobals";
@@ -22,6 +27,13 @@ export default function useMember() {
     }
   );
 
+  const logoutMember = useMutation(() => logout(), {
+    onSuccess: () => {
+      console.log("logout");
+      setAuthMember(null);
+    },
+  });
+
   const getUsers = useQuery<any[]>("getUsers", fetchUsers, {
     staleTime: 1000 * 60,
   });
@@ -36,5 +48,5 @@ export default function useMember() {
     }
   );
 
-  return { getUsers, updateUser, loginMember };
+  return { getUsers, updateUser, loginMember, logoutMember };
 }

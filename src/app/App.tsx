@@ -7,13 +7,12 @@ import ShopPage from "./screen/shopPage";
 import SalePage from "./screen/salePgae";
 import DashBoardPage from "./screen/dash-boardPage";
 import Footer from "./components/footer";
+import Auth from "./components/auth";
 import "../css/navbar.css";
 import "../css/footer.css";
-import Auth from "./components/auth";
 
 function App() {
   const location = useLocation();
-  console.log(location);
 
   return (
     <>
