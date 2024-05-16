@@ -29,7 +29,7 @@ export const logout = async (): Promise<void> => {
 
 // 사용자 목록을 가져오는 함수
 export const fetchUsers = async (): Promise<any[]> => {
-  const response = await apiClient.get("/user/all");
+  const response = await apiClient.get("/admin/user/all");
   return response.data.users;
 };
 
@@ -38,11 +38,11 @@ export const updateUserStatus = async (
   _id: string,
   memberStatus: string
 ): Promise<void> => {
-  await apiClient.post("/user/edit", { _id, memberStatus });
+  await apiClient.post("/admin/user/edit", { _id, memberStatus });
 };
 
 export const fetchProducts = async (): Promise<any[]> => {
-  const response = await apiClient.get("/product/all");
+  const response = await apiClient.get("/admin/product/all");
   return response.data.products;
 };
 

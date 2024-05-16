@@ -35,7 +35,7 @@ export default function Products() {
                 <TableCell>Product Color</TableCell>
                 <TableCell>Product Price</TableCell>
                 <TableCell>Product Left Count</TableCell>
-                <TableCell>Product Status</TableCell>
+                {/* <TableCell>Product Status</TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -48,7 +48,7 @@ export default function Products() {
                     <TableCell>{user.productColor}</TableCell>
                     <TableCell>{user.productPrice}</TableCell>
                     <TableCell>{user.productLeftCount}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <Select
                         size="small"
                         value={user.productStatus}
@@ -60,7 +60,7 @@ export default function Products() {
                         <MenuItem value="PROCESS">PROCESS</MenuItem>
                         <MenuItem value="DELETE">DELETE</MenuItem>
                       </Select>
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 );
               })}

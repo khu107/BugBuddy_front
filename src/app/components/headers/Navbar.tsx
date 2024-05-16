@@ -22,6 +22,8 @@ import useMember from "../../../hooks/useMember";
 
 export default function Navbar() {
   const { authMember } = useGlobals();
+  console.log(authMember?.memberNick[0]);
+
   const dispatch = useDispatch();
   const { logoutMember } = useMember();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -101,11 +103,9 @@ export default function Navbar() {
                 Login
               </Button>
             ) : (
-              <Avatar
-                alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
-                onClick={handleLogoutClick}
-              />
+              <Avatar alt="Remy Sharp" onClick={handleLogoutClick}>
+                {authMember && authMember?.memberNick[0].toUpperCase()}
+              </Avatar>
             )}
             <Menu
               anchorEl={anchorEl}

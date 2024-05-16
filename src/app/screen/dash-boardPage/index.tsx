@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -6,13 +6,21 @@ import { Box } from "@mui/material";
 import Users from "./Users";
 import Products from "./Products";
 import CreateProduct from "./CreateProduct";
+import { useGlobals } from "../../../hooks/useGlobals";
+import { useNavigate } from "react-router-dom";
 
 export default function DashBoardPage() {
   const [value, setValue] = useState("1");
-
+  const navigate = useNavigate();
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+  const { authMember } = useGlobals();
+  useEffect(() => {
+    if (!authMember || authMember?.memberType !== "ADMIN") {
+      navigate("/");
+    }
+  }, [authMember, navigate]);
   return (
     <div>
       <TabContext value={value}>
