@@ -9,37 +9,13 @@ const apiClient = axios.create({
   },
 });
 
-// login
-export const login = async (input: {
-  memberEmail: string;
-  memberPassword: string;
-}): Promise<any> => {
-  const result = await apiClient.post("/member/login", input);
-  const member = result.data.member;
-  localStorage.setItem("memberData", JSON.stringify(member));
-  return member;
-};
-
-// logout
-
-export const logout = async (): Promise<void> => {
-  const result = await apiClient.post("/member/logout", {});
-  localStorage.removeItem("memberData");
-};
-
-// 사용자 목록을 가져오는 함수
-export const fetchUsers = async (): Promise<any[]> => {
-  const response = await apiClient.get("/admin/user/all");
-  return response.data.users;
-};
-
 // 사용자 상태를 업데이트하는 함수
-export const updateUserStatus = async (
-  _id: string,
-  memberStatus: string
-): Promise<void> => {
-  await apiClient.post("/admin/user/edit", { _id, memberStatus });
-};
+// export const updateUserStatus = async (
+//   _id: string,
+//   memberStatus: string
+// ): Promise<void> => {
+//   await apiClient.post("/admin/user/edit", { _id, memberStatus });
+// };
 
 export const fetchProducts = async (): Promise<any[]> => {
   const response = await apiClient.get("/admin/product/all");

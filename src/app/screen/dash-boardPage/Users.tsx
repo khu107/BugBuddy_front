@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@mui/material";
 import useMember from "../../../hooks/useMember";
+import { MemberStatus } from "../../../libs/enums/member.enum";
 
 export default function Users() {
   const {
@@ -19,7 +20,7 @@ export default function Users() {
 
   const { updateUser } = useMember();
 
-  const handleStatusChange = (_id: string, memberStatus: string) => {
+  const handleStatusChange = (_id: string, memberStatus: MemberStatus) => {
     updateUser.mutate({ _id, memberStatus });
   };
 
@@ -50,12 +51,15 @@ export default function Users() {
                         size="small"
                         value={user.memberStatus}
                         onChange={(e) =>
-                          handleStatusChange(user._id, e.target.value)
+                          handleStatusChange(
+                            user._id,
+                            e.target.value as MemberStatus
+                          )
                         }
                       >
-                        <MenuItem value="BLOCK">BLOCK</MenuItem>
-                        <MenuItem value="ACTIVE">ACTIVE</MenuItem>
-                        <MenuItem value="DELETE">DELETE</MenuItem>
+                        <MenuItem value={MemberStatus.BLOCK}>BLOCK</MenuItem>
+                        <MenuItem value={MemberStatus.ACTIVE}>ACTIVE</MenuItem>
+                        <MenuItem value={MemberStatus.DELETE}>DELETE</MenuItem>
                       </Select>
                     </TableCell>
                   </TableRow>
