@@ -1,9 +1,12 @@
-import React from "react";
+import "../../../css/home.css";
+import Banner from "./Banner";
+import OurItems from "./OurItems";
 
 export default function HomePage() {
   return (
-    <div>
-      <div>HomePage</div>
+    <div className="homepage">
+      <Banner />
+      <OurItems />
     </div>
   );
 }

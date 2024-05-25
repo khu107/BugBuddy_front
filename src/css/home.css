@@ -1,0 +1,41 @@
+.homepage {
+  width: 100%;
+  height: auto;
+  margin-top: 87px;
+}
+
+.homepage .baner {
+  height: 601px;
+  background-image: url("../../public/image/baner.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage .baner .shop_box {
+  width: 549px;
+  height: 180px;
+  background-color: rgb(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage .baner .shop_box .shop_title {
+}
+
+/* items */
+.homepage .items {
+  width: 100%;
+  height: 683px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.homepage .items .card_items {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+}

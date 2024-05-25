@@ -35,12 +35,12 @@ export default function Navbar() {
 
   return (
     <div className="navbar">
-      <Container className="navbar-container">
+      <Container>
         <Stack
           flexDirection={"row"}
           alignItems={"center"}
           height={"100%"}
-          justifyContent={"space-around"}
+          justifyContent={"space-between"}
         >
           <Typography variant="h3" color={"#D3D3D3"} letterSpacing={"0.3em"}>
             PRETTY GAL
