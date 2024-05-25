@@ -1,5 +1,6 @@
 import apiClient from "../api/apiClient";
-import { LoginInput, Member, MemberUpdateInput } from "../../libs/types/member";
+import { LoginInput, Member } from "../../libs/types/member";
+import axios from "axios";
 
 class MemberService {
   constructor() {}
@@ -24,30 +25,6 @@ class MemberService {
       localStorage.removeItem("memberData");
     } catch (error) {
       console.log("Error: logout", error);
-      throw error;
-    }
-  }
-
-  public async getUsers(): Promise<Member[]> {
-    try {
-      const url = "/admin/user/all";
-      const result = await apiClient.get(url);
-      console.log("getUsers", result);
-
-      return result.data.users;
-    } catch (error) {
-      console.log("Error: getUsers", error);
-      throw error;
-    }
-  }
-
-  public async updateUserStatus(input: MemberUpdateInput): Promise<Member> {
-    try {
-      const url = "/admin/user/edit";
-      const result = await apiClient.post(url, input);
-      return result.data;
-    } catch (error) {
-      console.log("Error: updateUserStatus", error);
       throw error;
     }
   }

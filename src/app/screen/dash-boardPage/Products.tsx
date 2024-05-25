@@ -1,8 +1,6 @@
 import { TabPanel } from "@mui/lab";
 import {
-  MenuItem,
   Paper,
-  Select,
   Table,
   TableBody,
   TableCell,
@@ -10,17 +8,13 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import useProducts from "../../../hooks/useProducts";
+
+import useAdmin from "../../../hooks/useAdmin";
 
 export default function Products() {
   const {
     getProducts: { isLoading, error, data },
-  } = useProducts();
-  console.log(data);
-
-  const handleStatusChange = (_id: string, memberStatus: string) => {
-    // updateUser.mutate({ _id, memberStatus });
-  };
+  } = useAdmin();
 
   return (
     <div>

@@ -2,11 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 import { closeAuthModal } from "../redux/authSlice";
 import { useGlobals } from "./useGlobals";
-import { T } from "../libs/types/common";
 import MemberService from "../app/services/MemberService";
-import { LoginInput, MemberUpdateInput } from "../libs/types/member";
+import { LoginInput } from "../libs/types/member";
+import AdminService from "../app/services/AdminService";
+import { T } from "../libs/types/common";
 
 const member = new MemberService();
+const admin = new AdminService();
 
 export default function useMember() {
   const { setAuthMember } = useGlobals();
@@ -30,21 +32,5 @@ export default function useMember() {
     },
   });
 
-  const getUsers = useQuery("getUsers", member.getUsers, {
-    staleTime: 1000 * 60,
-  });
-
-  const updateUser = useMutation(
-    (input: MemberUpdateInput) => member.updateUserStatus(input),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("getUsers");
-      },
-      onError: (error: T) => {
-        console.log(error);
-      },
-    }
-  );
-
-  return { getUsers, updateUser, loginMember, logoutMember };
+  return { loginMember, logoutMember };
 }

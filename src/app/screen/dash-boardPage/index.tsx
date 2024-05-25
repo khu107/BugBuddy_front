@@ -1,4 +1,5 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -7,20 +8,32 @@ import Users from "./Users";
 import Products from "./Products";
 import CreateProduct from "./CreateProduct";
 import { useGlobals } from "../../../hooks/useGlobals";
-import { useNavigate } from "react-router-dom";
 
 export default function DashBoardPage() {
-  const [value, setValue] = useState("1");
   const navigate = useNavigate();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const [value, setValue] = useState(query.get("tab") || "1");
+
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
+    navigate(`?tab=${newValue}`, { replace: true });
   };
+
   const { authMember } = useGlobals();
   useEffect(() => {
     if (!authMember || authMember?.memberType !== "ADMIN") {
       navigate("/");
     }
   }, [authMember, navigate]);
+
+  useEffect(() => {
+    const tab = query.get("tab");
+    if (tab) {
+      setValue(tab);
+    }
+  }, [location]);
+
   return (
     <div>
       <TabContext value={value}>
@@ -31,9 +44,9 @@ export default function DashBoardPage() {
           }}
         >
           <Tabs value={value} onChange={handleChange}>
-            <Tab label="Users" value={"1"} />
-            <Tab label="Products" value={"2"} />
-            <Tab label="CreateProduct" value={"3"} />
+            <Tab label="Users" value="1" />
+            <Tab label="Products" value="2" />
+            <Tab label="CreateProduct" value="3" />
           </Tabs>
         </Box>
         <Users />

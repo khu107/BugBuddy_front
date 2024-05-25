@@ -10,15 +10,16 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import useMember from "../../../hooks/useMember";
+
 import { MemberStatus } from "../../../libs/enums/member.enum";
+import useAdmin from "../../../hooks/useAdmin";
 
 export default function Users() {
   const {
-    getUsers: { isLoading, error, data },
-  } = useMember();
+    getUsers: { data },
+  } = useAdmin();
 
-  const { updateUser } = useMember();
+  const { updateUser } = useAdmin();
 
   const handleStatusChange = (_id: string, memberStatus: MemberStatus) => {
     updateUser.mutate({ _id, memberStatus });

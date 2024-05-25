@@ -13,30 +13,30 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import axios from "axios";
+import { T } from "../../../libs/types/common";
+import useAdmin from "../../../hooks/useAdmin";
 
 export default function CreateProduct() {
-  const [images, setImages] = useState<File[]>([]);
-  console.log(images);
-
-  const [productType, setProductType] = useState<string>("");
+  const [productImages, setProductImages] = useState<(string | File)[]>([]);
+  const [productCollection, setProductCollection] = useState<string>("");
   const [productSize, setProductSize] = useState<string>("");
   const [productColor, setProductColor] = useState<string>("");
   const [productName, setProductName] = useState<string>("");
   const [productPrice, setProductPrice] = useState<string>("");
   const [productLeftCount, setProductLeftCount] = useState<string>("");
   const [productDesc, setProductDesc] = useState<string>("");
-  console.log(productName);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const fileArray = Array.from(e.target.files);
-      setImages((prevImages) => [...prevImages, ...fileArray].slice(0, 3)); // 최대 3개의 이미지
+      setProductImages((prevImages) =>
+        [...prevImages, ...fileArray].slice(0, 3)
+      );
     }
   };
 
-  const handleProductTypeChange = (e: SelectChangeEvent<string>) => {
-    setProductType(e.target.value);
+  const handleProductCollectionChange = (e: SelectChangeEvent<string>) => {
+    setProductCollection(e.target.value);
   };
 
   const handleProductSizeChange = (e: SelectChangeEvent<string>) => {
@@ -47,49 +47,29 @@ export default function CreateProduct() {
     setProductColor(e.target.value);
   };
 
-  const handleSubmit = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("productName", productName);
-      formData.append("productPrice", productPrice);
-      formData.append("productLeftCount", productLeftCount);
-      formData.append("productCollection", productType);
-      formData.append("productSize", productSize);
-      formData.append("productColor", productColor);
-      formData.append("productDesc", productDesc);
+  const { createProduct } = useAdmin();
 
-      for (let i = 0; i < images.length; i++) {
-        formData.append("productImages", images[i]);
-      }
-
-      const response = await axios(
-        "http://localhost:3004/admin/product/create",
-        {
-          method: "POST",
-          data: formData,
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-
-      // 서버에서 반환하는 응답 처리
-      console.log("Product submission successful:", response.data);
-
-      // 상태 초기화 또는 다른 작업 수행
-      setProductName("");
-      setProductPrice("");
-      setProductLeftCount("");
-      setProductType("");
-      setProductSize("");
-      setProductColor("");
-      setProductDesc("");
-      setImages([]);
-    } catch (error) {
-      console.error("Error submitting product data:", error);
-      // 오류 처리
-    }
+  const handleSubmit = async (e: T) => {
+    e.preventDefault();
+    const newProduct = {
+      productName,
+      productPrice,
+      productLeftCount,
+      productCollection,
+      productSize,
+      productColor,
+      productDesc,
+      productImages,
+    };
+    createProduct.mutate(newProduct);
+    setProductName("");
+    setProductPrice("");
+    setProductLeftCount("");
+    setProductCollection("");
+    setProductSize("");
+    setProductColor("");
+    setProductDesc("");
+    setProductImages([]);
   };
 
   return (
@@ -137,9 +117,9 @@ export default function CreateProduct() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={productType}
+                    value={productCollection}
                     label="Product Type"
-                    onChange={handleProductTypeChange}
+                    onChange={handleProductCollectionChange}
                   >
                     <MenuItem value={"SHOP"}>SHOP</MenuItem>
                     <MenuItem value={"SALE"}>SALE</MenuItem>
@@ -222,10 +202,10 @@ export default function CreateProduct() {
             </label>
 
             <Stack flexDirection={"row"} gap={2}>
-              {images.map((image, index) => (
+              {productImages.map((image, index) => (
                 <Box key={index} sx={{ width: "100px", height: "100px" }}>
                   <img
-                    src={URL.createObjectURL(image)}
+                    src={URL.createObjectURL(image as File)}
                     alt={`product-${index}`}
                     style={{
                       width: "100%",
